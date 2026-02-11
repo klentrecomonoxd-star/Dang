@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { font-size: 62.5%; }
+
+body {
+  background-color: #fff0f6;
+  font-family: "Protest Riot", sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.cat-img {
+  width: 30rem;
+  height: 30rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  object-fit: cover;
+  mix-blend-mode: lighten;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.title {
+  font-size: 3.6rem;
+  color: #f53699;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 2;
+}
+
+.btn {
+  padding: 1.5rem 2.5rem;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn--yes { background-color: #40c057; }
+.btn--no { background-color: #f03e3e; }
+.hidden { display: none; }
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.2) rotate(-10deg); }
+  50% { transform: scale(1.1) rotate(10deg); }
+  75% { transform: scale(1.2) rotate(-10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.bounce { animation: bounce 1s ease forwards; }
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.pop { animation: pop 0.8s ease forwards; }
+
+/* Explosion hearts */
+.particle {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: pink; /* JS will override */
+  transform: rotate(-45deg);
+  border-radius: 0.25rem;
+  opacity: 0.9;
+}
+
+/* Heart shape via border-radius trick */
+.particle::before,
+.particle::after {
+  content: '';
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.particle::before { top: -0.5rem; left: 0; }
+.particle::after { top: 0; left: 0.5rem; }
+
+@keyframes float {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-200px) translateX(calc(-50px + 100px * var(--randX))) scale(0.5); opacity: 0; }
+}
+
+/* Background hearts */
+.background-hearts {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bg-heart {
+  position: absolute;
+  width: 1.5rem; height: 1.5rem;
+  background: #f53699;
+  transform: rotate(-45deg);
+  opacity: 0.6;
+}
+
+.bg-heart::before,
+.bg-heart::after {
+  content: '';
+  position: absolute;
+  width: 1.5rem; height: 1.5rem;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.bg-heart::before { top: -0.75rem; left: 0; }
+.bg-heart::after { top: 0; left: 0.75rem; }
+
+@keyframes floatBg {
+  0% { transform: translateY(100vh) scale(var(--size)); opacity: 0.6; }
+  100% { transform: translateY(-50px) scale(var(--size)); opacity: 0; }
+}
